@@ -2,13 +2,6 @@ package org.ar.model;
 
 public class Clientes {
 
-    /*
-    cui bigint primary key,
-    nombre_cliente varchar(100),
-    apellido_cliente varchar(100),
-    correo_electronico varchar(100)
-);
-     */
 
     // atributos dde clase
     private long cui;
