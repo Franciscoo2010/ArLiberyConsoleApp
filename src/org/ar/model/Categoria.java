@@ -34,7 +34,7 @@ public class Categoria {
     public void setNombre(String nombre) {
        // formatear a mayusculas
         String nombreMayusculas = nombre.toUpperCase();
-        // formatear a inicial con Mayusculas 
+        // formatear a inicial con Mayusculas git config
         this.nombre = nombre;
     }
 

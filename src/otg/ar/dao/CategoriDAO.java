@@ -1,13 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package otg.ar.dao;
 
-/**
- *
- * @author informatica
- */
+import java.util.List;
+import org.ar.model.Categoria;
+
+
 public interface CategoriDAO {
+// firmas de metodos
+
+    /**
+     *
+     * @param categoria
+     * @return
+     */
+    
+    boolean insertar (Categoria categoria);
+    List<Categoria> listarTodos ();
+    Categoria buscar(long cui);
+    boolean actualizar(Categoria categoria);
+    boolean eliminar(long cui);
     
 }
