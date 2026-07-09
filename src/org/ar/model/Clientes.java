@@ -4,8 +4,8 @@ public class Clientes {
 
 
     // atributos dde clase
-    private long cui;
-    protected String nombre;
+    long cui;
+    String nombre;
     String apellido;
     String correoElectronico;
 

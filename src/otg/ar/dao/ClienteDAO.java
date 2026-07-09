@@ -7,7 +7,7 @@ import org.ar.model.Clientes;
 public interface ClienteDAO {
     //firmas de metodos
     boolean insertar(Clientes cliente);
-    List<Clientes> listar();
+    List<Clientes> listarTodos();
     Clientes buscar(long cui);
     boolean actualizar(Clientes cliente);
     boolean eliminar(long cui);
