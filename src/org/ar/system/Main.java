@@ -4,18 +4,16 @@
  */
 package org.ar.system;
 
-/**
- *
- * @author informatica
- */
-public class Main {
+import org.ar.util.Conexion;
 
-    /**
-     * @param args the command line arguments
-     */
+public class Main {
     public static void main(String[] args) {
-        // TODO code application logi
-          
+        //sout
+        //MVC Modelo,Vista, Controlador. Esto mejora la legibilidad y estandariza en código (patron de diseño)
+        //DAO (objeto de acceso a datos)
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.iniciarSistema();
+        Conexion db = new Conexion();
+        db.conectar();
     }
-    
 }

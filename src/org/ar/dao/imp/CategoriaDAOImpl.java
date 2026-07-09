@@ -7,6 +7,9 @@ import org.ar.model.Categoria;
 import otg.ar.dao.CategoriDAO;
  
 import java.util.List;
+import java.sql.CallableStatement;
+import org.ar.util.Conexion;
+import 
  
 public class CategoriaDAOImpl implements CategoriDAO{
 
@@ -23,9 +26,15 @@ public class CategoriaDAOImpl implements CategoriDAO{
         String consulta = "{call sp_listarcategorias}";
         //mapaer el resultado de la consulta a objeto y lo agregamos a la lista
         // intentar con recursos -> ciera el recurso al completar el intento
-        try(conexion) {
-            
-}       catch (Exception e) {
+        // recurso: Conexion, al final cierra
+        try(
+        Connection conexion = Conexion.getInstancia().conectar();
+        CallableStatement consultaCall = conexion.pepareCall(consulta);
+                ResultSet tablaResultado  = consultaCall.executeQuery();  
+                ) {
+            System.out.println("");
+} 
+        catch (Exception e) {
         }
         return null;
     }
