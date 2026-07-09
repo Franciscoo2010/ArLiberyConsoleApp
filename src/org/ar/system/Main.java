@@ -1,21 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package org.ar.system;
 
-/**
- *
- * @author informatica
- */
+import java.util.List;
+import org.ar.dao.imp.editorialDAOImpl;
+import org.ar.model.editorial;
+
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logi
-          
+
+        editorialDAOImpl dao = new editorialDAOImpl();
+
+        List<editorial> lista = dao.listarTodos();
+
+        if (lista.isEmpty()) {
+            System.out.println("No hay editoriales registradas.");
+        } else {
+            for (editorial e : lista) {
+                System.out.println("NIT: " + e.getNit());
+                System.out.println("Nombre: " + e.getNombre_editorial());
+                System.out.println("Teléfono: " + e.getTelefono_editorial());
+                System.out.println("Dirección: " + e.getDireccion_editoria());
+                System.out.println("-------------------------");
+            }
+        }
     }
-    
 }

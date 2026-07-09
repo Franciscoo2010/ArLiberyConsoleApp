@@ -7,11 +7,11 @@ public interface editorialDAO {
 
     boolean insertar(editorial editorial);
 
-    List<editorial> listar();
+    List<editorial> listarTodos();
 
-    editorial buscar(long nit);
+    editorial buscar(String nit);
 
     boolean actualizar(editorial editorial);
 
-    boolean eliminar(long nit);
+    boolean eliminar(String nit);
 }
