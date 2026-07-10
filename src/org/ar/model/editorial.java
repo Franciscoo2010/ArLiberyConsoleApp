@@ -34,10 +34,9 @@ public class editorial {
         return nombre_editorial;
     }
  
-    public void setNombre_editorial(String nombre_editorial) {
-        String nombreMayusculas = nombre_editorial.toUpperCase();
-        this.nombre_editorial = nombre_editorial;
-    }
+public void setNombre_editorial(String nombre_editorial) {
+    this.nombre_editorial = nombre_editorial.toUpperCase();
+}
  
     public String getTelefono_editorial() {
         return telefono_editorial;
