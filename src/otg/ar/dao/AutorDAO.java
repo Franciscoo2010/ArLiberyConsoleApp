@@ -1,15 +1,17 @@
 package otg.ar.dao;
 
-import org.ar.model.Autores;
 import java.util.List;
-
+import org.ar.model.Autor;
 
 public interface AutorDAO {
-    //firmas de metodos
-    
-    boolean insertar (Autores autor);
-    List<Autores> listar ();
-    Autores buscar(long cui);
-    boolean actualizar(Autores autor);
-    boolean eliminar(long cui);
+
+    boolean insertar(Autor autor);
+
+    List<Autor> listarTodos();
+
+    Autor buscar(int idAutor);
+
+    boolean actualizar(Autor autor);
+
+    boolean eliminar(int idAutor);
 }
