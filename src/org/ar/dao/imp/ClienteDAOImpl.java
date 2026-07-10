@@ -19,31 +19,34 @@ public class ClienteDAOImpl implements ClienteDAO{
     }
 
     @Override
-    public List<Clientes> listarTodos() {
-        //crear una lista
-        List<Clientes> clientes = new ArrayList<>(); //null
-        //crear nuestra consulta
-        String consulta = "{call sp_listarclientes()}";
-        //mapear el resultado de la consulta a objeto y lo agregamos a la lista
-         //try with recources / intentar con recursos -> cierra el recurso al completar el intento
-            try(
-                    Connection conexion = Conexion.getInstancia().conectar();
-                    CallableStatement consultaCall = conexion.prepareCall(consulta);
-                    ResultSet tablaResultado = consultaCall.executeQuery()){
-                while (tablaResultado.next()){
-                    clientes.add(new Clientes(
-                            tablaResultado.getLong("cui"),
-                            tablaResultado.getString("nombre_cliente"),
-                            tablaResultado.getString("apellido_cliente"),
-                            tablaResultado.getString("correo_electronico")
-                    ));
-                }
-            } catch (Exception e){
-                System.err.print("Error al listar Clientes" + e.getMessage());
-                
-            }
-        return null;
+public List<Clientes> listarTodos() {
+
+    List<Clientes> clientes = new ArrayList<>();
+
+    String consulta = "{call sp_listarClientes()}";
+
+    try (
+        Connection conexion = Conexion.getInstancia().conectar();
+        CallableStatement consultaCall = conexion.prepareCall(consulta);
+        ResultSet tablaResultado = consultaCall.executeQuery()
+    ) {
+
+        while (tablaResultado.next()) {
+
+            clientes.add(new Clientes(
+                tablaResultado.getLong("cui"),
+                tablaResultado.getString("nombre_cliente"),
+                tablaResultado.getString("apellido_cliente"),
+                tablaResultado.getString("correo_electronico")
+            ));
+        }
+
+    } catch (Exception e) {
+        System.out.println("Error al listar clientes: " + e.getMessage());
     }
+
+    return clientes;   // <-- aquí está la corrección
+}
 
     @Override
     public Clientes buscar(long cui) {
