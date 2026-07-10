@@ -18,5 +18,7 @@ public interface CategoriDAO {
     Categoria buscar(long cui);
     boolean actualizar(Categoria categoria);
     boolean eliminar(long cui);
+
+    public Categoria buscarPorId(int id);
     
 }
