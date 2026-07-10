@@ -28,14 +28,14 @@ public class MenuPrincipal {
             //swich / case
             switch (opcion) {
                 case 1:
-                    //instanciar la vista CLIENTES
+                    //instanciar la vista CATGORIAS
                     CategoriaConseleView vista = new CategoriaConseleView();
                     CategoriaController control = new CategoriaController(vista);
                     control.iniciar();
                     break;
                 case 2:
-                    //instanciar la vista EDITORIALES
-                    System.out.println("EDITORIALES");
+                    //instanciar la vista Categoria
+                    System.out.println("Ctegorias");
                     break;
                 case 3:
                     //instanciar la vista LIBROS
@@ -43,7 +43,7 @@ public class MenuPrincipal {
                     break;
                 case 4:
                     //instanciar la vista LIBROS
-                    System.out.println("\n Hasta luego sixseveniano...");
+                    System.out.println(" Hasta luego ...");
                     break;
                 default:
                     System.out.println("no existe esta opción");
@@ -54,8 +54,3 @@ public class MenuPrincipal {
     }
  
 }
-
-tiene menú contextual
-
-
-tienes menú contextual
