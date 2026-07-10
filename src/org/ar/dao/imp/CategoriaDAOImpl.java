@@ -6,36 +6,38 @@ import java.util.ArrayList;
 import org.ar.model.Categoria;
 import otg.ar.dao.CategoriDAO;
  
-import java.util.List;
-import java.sql.CallableStatement;
 import org.ar.util.Conexion;
-import 
- 
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+
+import java.util.List;
+import java.sql.Connection;
+
 public class CategoriaDAOImpl implements CategoriDAO{
 
-    @Override
-    public boolean insertar(Categoria categoria) {
-        return false;
-    }
-
-    @Override
-    public List<Categoria> listarTodos() {
-        // crear nuestra consulta
-        List<Categoria> categoria = new ArrayList <>();
+    public List<Categoria> listar() {
+        //crear una lista
+        List<Categoria> categoria = new ArrayList<>(); //null
         //crear nuestra consulta
-        String consulta = "{call sp_listarcategorias}";
-        //mapaer el resultado de la consulta a objeto y lo agregamos a la lista
-        // intentar con recursos -> ciera el recurso al completar el intento
-        // recurso: Conexion, al final cierra
-        try(
-        Connection conexion = Conexion.getInstancia().conectar();
-        CallableStatement consultaCall = conexion.pepareCall(consulta);
-                ResultSet tablaResultado  = consultaCall.executeQuery();  
-                ) {
-            System.out.println("");
-} 
-        catch (Exception e) {
-        }
+        String consulta = "{call sp_listarclientes()}";
+        //mapear el resultado de la consulta a objeto y lo agregamos a la lista
+         //try with recources / intentar con recursos -> cierra el recurso al completar el intento
+            try(
+                    Connection conexion = Conexion.getInstancia().conector();
+                    CallableStatement consultaCall = conexion.prepareCall(consulta);
+                    ResultSet tablaResultado = consultaCall.executeQuery()){
+                while (tablaResultado.next()){
+                    Categoria.add(new Categoria(
+                            tablaResultado.getLong("cui"),
+                            tablaResultado.getString("nombre_cliente"),
+                            tablaResultado.getString("apellido_cliente"),
+                            tablaResultado.getString("correo_electronico")
+                    ));
+                }
+            } catch (Exception e){
+                System.err.print("Error al listar Clientes" + e.getMessage());
+                
+            }
         return null;
     }
 
@@ -52,5 +54,15 @@ public class CategoriaDAOImpl implements CategoriDAO{
     @Override
     public boolean eliminar(long cui) {
         return false;
+    }
+
+    @Override
+    public boolean insertar(Categoria categoria) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Categoria> listarTodos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
