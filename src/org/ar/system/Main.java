@@ -1,17 +1,15 @@
 package org.ar.system;
-
-/**
- *
- * @author informatica
- */
+ 
+import org.ar.view.MenuPrincipal;
+ 
 public class Main {
-
-    /**
-     * @param args the command line arguments
-     */
+ 
     public static void main(String[] args) {
-        // TODO code application logi
-          
+ 
+        // MVC Modelo, Vista, Controlador
+        // DAO (Objeto de Acceso a Datos)
+ 
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.iniciarSistema();
     }
-    
 }
