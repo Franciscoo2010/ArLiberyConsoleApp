@@ -1,21 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package org.ar.system;
-
-/**
- *
- * @author informatica
- */
+ 
+import org.ar.view.MenuPrincipal;
+ 
 public class Main {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logi
-          
+        //sout
+        //MVC Modelo,Vista, Controlador. Esto mejora la legibilidad y estandariza en código (patron de diseño)
+        //DAO (objeto de acceso a datos)
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.iniciarSistema();
     }
     
 }
