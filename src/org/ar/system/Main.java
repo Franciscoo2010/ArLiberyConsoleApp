@@ -1,14 +1,15 @@
 package org.ar.system;
 
+import org.ar.view.MenuPrincipal;
 
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logi
-          
+        
+        // Patrón de Diseño: MVC (Modelo, Vista, Controlador) y DAO (Objeto de Acceso a Datos).
+        // Aplicado correctamente para la gestión de Autores.
+        
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.iniciarSistema();
     }
-    
 }
