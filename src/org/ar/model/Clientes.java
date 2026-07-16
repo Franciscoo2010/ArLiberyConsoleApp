@@ -18,6 +18,8 @@ public Clientes(long cui, String nombre, String apellido, String correoElectroni
 }
     //getter and setters
 
+   
+
     public long getCui() {
         return cui;
     }
@@ -52,7 +54,10 @@ public Clientes(long cui, String nombre, String apellido, String correoElectroni
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
+
+// Constructor vacío requerido para poder instanciar un cliente vacío y luego llenarlo con setters
+public Clientes() {
 }
 
-    
+    }
 

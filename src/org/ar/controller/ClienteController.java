@@ -1,29 +1,58 @@
-
 package org.ar.controller;
 
 import org.ar.dao.imp.ClienteDAOImpl;
+import org.ar.model.Clientes;
 import org.ar.view.ClienteConsoleView;
 import otg.ar.dao.ClienteDAO;
 
 public class ClienteController {
+
     private final ClienteDAO dao;
     private final ClienteConsoleView vista;
-    
-    public ClienteController(ClienteConsoleView vista){
+
+    public ClienteController(ClienteConsoleView vista) {
         this.dao = new ClienteDAOImpl();
         this.vista = vista;
     }
-    
-    public void iniciar(){
+
+    public void iniciar() {
         int opcion;
-        do{
+        do {
             opcion = vista.mostrarMenu();
-            if(opcion == 2){
-                listar();
+            switch (opcion) {
+                case 1:
+                    break;
+                case 2:
+                    listar();
+                    break;
+                case 3:
+                    buscar();
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                default:
+                    throw new AssertionError();
             }
-        } while (opcion !=  4);
+
+        } while (opcion != 6);
     }
-    private void listar(){
-        vista.mostrarListaClientes( dao.listarTodos());
+
+    private void listar() {
+        vista.mostrarListaClientes(dao.listarTodos());
+    }
+
+    private void buscar() {
+        long cui = vista.solicitarCUI();
+        Clientes cliente = dao.buscarPorId(cui);
+        if (cliente != null) {
+            vista.mostrarCliente(cliente);
+
+        } else {
+            vista.mostrarMensaje("Cliente no encontrado con el CUI" + cui);
+        }
     }
 }

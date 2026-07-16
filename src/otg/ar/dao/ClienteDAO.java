@@ -8,7 +8,7 @@ public interface ClienteDAO {
     //firmas de metodos
     boolean insertar(Clientes cliente);
     List<Clientes> listarTodos();
-    Clientes buscar(long cui);
+    Clientes buscarPorId(long cui);
     boolean actualizar(Clientes cliente);
     boolean eliminar(long cui);
     
