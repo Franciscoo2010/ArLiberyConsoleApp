@@ -13,12 +13,14 @@ public interface CategoriDAO {
      * @return
      */
     
-    boolean insertar (Categoria categoria);
-    List<Categoria> listarTodos ();
-    Categoria buscar(long cui);
-    boolean actualizar(Categoria categoria);
-    boolean eliminar(long cui);
+     boolean insertar(Categoria categoria);
 
-    public Categoria buscarPorId(int id);
-    
+    List<Categoria> listarTodos();
+
+    Categoria buscarPorId(int id);
+
+    boolean actualizar(Categoria categoria);
+
+    boolean eliminar(int id);
+
 }
