@@ -11,88 +11,131 @@ import org.ar.model.editorial;
 import org.ar.util.Conexion;
 
 public class editorialDAOImpl implements editorialDAO {
+
     @Override
-public List<editorial> listarTodos() {
+    public List<editorial> listarTodos() {
 
-    List<editorial> editoriales = new ArrayList<>();
+        List<editorial> editoriales = new ArrayList<>();
 
-    String consulta = "{call sp_listareditoriales()}";
+        String consulta = "{call sp_listareditoriales()}";
 
-    try (
-        Connection conexion = Conexion.getInstancia().conectar();
-        CallableStatement cs = conexion.prepareCall(consulta);
-        ResultSet rs = cs.executeQuery()
-    ) {
+        try (
+                Connection conexion = Conexion.getInstancia().conectar(); CallableStatement cs = conexion.prepareCall(consulta); ResultSet rs = cs.executeQuery()) {
 
-        while (rs.next()) {
+            while (rs.next()) {
 
-            editorial edi = new editorial();
+                editorial edi = new editorial();
 
-            edi.setNit(rs.getString("nit"));
-            edi.setNombre_editorial(rs.getString("nombre_editorial"));
-            edi.setTelefono_editorial(rs.getString("telefono_editorial"));
-            edi.setDireccion_editoria(rs.getString("direccion_editoria"));
+                edi.setNit(rs.getString("nit"));
+                edi.setNombre_editorial(rs.getString("nombre_editorial"));
+                edi.setTelefono_editorial(rs.getString("telefono_editorial"));
+                edi.setDireccion_editoria(rs.getString("direccion_editoria"));
 
-            editoriales.add(edi);
+                editoriales.add(edi);
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error al listar editoriales: " + e.getMessage());
         }
 
-    } catch (Exception e) {
-        System.err.println("Error al listar editoriales: " + e.getMessage());
+        return editoriales;
     }
 
-    return editoriales;
-}
-@Override
-public boolean insertar(editorial editorial) {
-    return false;
-}
+    @Override
+    public boolean insertar(editorial editorial) {
 
-@Override
-public editorial buscar(String nit) {
+        String consulta = "{call sp_insertareditorial(?,?,?,?)}";
 
-    editorial edi = new editorial();
+        try (
+                Connection conexion = Conexion.getInstancia().conectar(); CallableStatement cs = conexion.prepareCall(consulta)) {
 
-    String consulta = "{call sp_buscar_editorial(?)}";
+            cs.setString(1, editorial.getNit());
+            cs.setString(2, editorial.getNombre_editorial());
+            cs.setString(3, editorial.getTelefono_editorial());
+            cs.setString(4, editorial.getDireccion_editoria());
 
-    try (
-        Connection conexion = Conexion.getInstancia().conectar();
-        CallableStatement cs = conexion.prepareCall(consulta)
-    ) {
+            cs.executeUpdate();
+            return true;
 
-        cs.setString(1, nit);
+        } catch (Exception e) {
+            System.err.println("Error al insertar editorial: " + e.getMessage());
+            return false;
+        }
+    }
 
-        ResultSet rs = cs.executeQuery();
+    @Override
+    public editorial buscar(String nit) {
 
-        if (rs.next()) {
+        editorial edi = new editorial();
 
-            edi.setNit(rs.getString("nit"));
-            edi.setNombre_editorial(rs.getString("nombre_editorial"));
-            edi.setTelefono_editorial(rs.getString("telefono_editorial"));
-            edi.setDireccion_editoria(rs.getString("direccion_editoria"));
+        String consulta = "{call sp_buscareditorial(?)}";
 
-            return edi;
-        } else {
+        try (
+                Connection conexion = Conexion.getInstancia().conectar(); CallableStatement cs = conexion.prepareCall(consulta)) {
 
-            System.out.println("No existe la editorial con ese NIT.");
-            return null;
+            cs.setString(1, nit);
+
+            ResultSet rs = cs.executeQuery();
+
+            if (rs.next()) {
+
+                edi.setNit(rs.getString("nit"));
+                edi.setNombre_editorial(rs.getString("nombre_editorial"));
+                edi.setTelefono_editorial(rs.getString("telefono_editorial"));
+                edi.setDireccion_editoria(rs.getString("direccion_editoria"));
+
+                return edi;
+            } else {
+
+                System.out.println("No existe la editorial con ese NIT.");
+                return null;
+            }
+
+        } catch (Exception e) {
+
+            System.err.println("Error al buscar editorial: " + e.getMessage());
+
         }
 
-    } catch (Exception e) {
-
-        System.err.println("Error al buscar editorial: " + e.getMessage());
-
+        return null;
     }
 
-    return null;
-}
+    @Override
+    public boolean actualizar(editorial editorial) {
 
-@Override
-public boolean actualizar(editorial editorial) {
-    return false;
-}
+        String consulta = "{call sp_actualizareditorial(?,?,?,?)}";
 
-@Override
-public boolean eliminar(String nit) {
-    return false;
-}
+        try (
+                Connection conexion = Conexion.getInstancia().conectar(); CallableStatement cs = conexion.prepareCall(consulta)) {
+            cs.setString(1, editorial.getNit());
+            cs.setString(2, editorial.getNombre_editorial());
+            cs.setString(3, editorial.getTelefono_editorial());
+            cs.setString(4, editorial.getDireccion_editoria());
+            cs.executeUpdate();
+            return true;
+
+        } catch (Exception e) {
+            System.err.println("Error al actualizar editorial: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean eliminar(String nit) {
+
+        String consulta = "{call sp_eliminareditorial(?)}";
+
+        try (
+                Connection conexion = Conexion.getInstancia().conectar(); CallableStatement cs = conexion.prepareCall(consulta)) {
+
+            cs.setString(1, nit);
+
+            cs.executeUpdate();
+            return true;
+
+        } catch (Exception e) {
+            System.err.println("Error al eliminar editorial: " + e.getMessage());
+            return false;
+        }
+    }
 }
