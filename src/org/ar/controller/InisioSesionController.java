@@ -1,11 +1,10 @@
-
 package org.ar.controller;
 
-
 import java.io.IOException;
+import otg.ar.dao.UsuarioDAO;
 import org.ar.util.SecurityUtil;
 import org.ar.model.Usuario;
-import otg.ar.dao.UsuarioDAO;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -21,7 +20,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import otg.ar.dao.UsuarioDAO;
 import org.ar.system.Main;
 import org.ar.util.SesionContext;
 import org.ar.util.ValidacionException;
@@ -43,13 +41,10 @@ public class InisioSesionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         usuarioDAO = new UsuarioDAO();
         lblMensaje.setText("");
-        //btnIniciarSesion.setOnAction(e -> eventoInicioSesion());
-
     }
     
     @FXML
     public void eventoInicioSesion(ActionEvent evento) {
-        
         try {
             ValidacionException.validarNoVacio(txtUsuario.getText(), "usuario");
             ValidacionException.validarNoVacio(txtPassword.getText(), "contraseña");
@@ -67,22 +62,19 @@ public class InisioSesionController implements Initializable {
             }
             
         } catch (ValidacionException e) {
-            //alerta
             mostrarAlerta(Alert.AlertType.WARNING, e.getMessage());
             lblMensaje.setText(e.getMessage());
         }        
     }
-    //metodo para boton registrarse
+
     public void eventoRegistrarse(ActionEvent evento){
         try {
             Main.cambiarEscena("/org/ar/view/RegistrarUsuarioView.fxml");
         } catch (IOException e) {
-            System.err.println("Error al carger registro:  " +  e.getMessage());
+            System.err.println("Error al cargar registro: " + e.getMessage());
             lblMensaje.setText("Error interno");
         }
     }
-    
-    
     
     private void abrirDashboard(Usuario usuario) {
         SesionContext.getInstancia().setUsuairoActual(usuario);
@@ -90,19 +82,24 @@ public class InisioSesionController implements Initializable {
         
         switch (usuario.getRol().toLowerCase()) {
             case "admin":
-                rutaFXML = "/org/ar/view/AdminDashboradView.fxml";
-                
+                rutaFXML = "/org/ar/view/AdminDashboardView.fxml";
+                break;
+            case "cajero":
+                rutaFXML = "/org/ar/view/CajeroDashboardView.fxml";
                 break;
             case "empleado":
-                rutaFXML = "/org/ar/view/EmpleadoDashboradView.fxml";
+                rutaFXML = "/org/ar/view/EmpleadoDashboardView.fxml";
                 break;
-            
+            default:
+                System.err.println("Rol no reconocido: " + usuario.getRol());
+                lblMensaje.setText("Rol no asignado o inválido");
+                return;
         }
+
         try {
             Main.cambiarEscena(rutaFXML);
-            
         } catch (IOException e) {
-            System.err.println("Error al cargar la vista:" + rutaFXML + e.getMessage());
+            System.err.println("Error al cargar la vista: " + rutaFXML + " -> " + e.getMessage());
             lblMensaje.setText("Error interno");
         }
     }
@@ -111,5 +108,4 @@ public class InisioSesionController implements Initializable {
         Alert alerta = new Alert(tipo, mensaje, ButtonType.OK);
         alerta.show();
     }
-    
 }
