@@ -75,3 +75,4 @@ public class EditorialConsoleView {
         System.out.println(mensaje);
     }
 }
+
