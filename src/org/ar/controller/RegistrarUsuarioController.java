@@ -1,9 +1,8 @@
-
 package org.ar.controller;
-
+ 
 import java.io.IOException;
 import javafx.fxml.FXML;
-
+ 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -17,26 +16,24 @@ import otg.ar.dao.UsuarioDAO;
 import org.ar.system.Main;
 import org.ar.util.SecurityUtil;
 import org.ar.util.ValidacionException;
-
+ 
 public class RegistrarUsuarioController implements Initializable {
-
+ 
     @FXML private TextField txtUsusario;
     @FXML private TextField txtPassword;
     @FXML private TextField txtConfirmarPassword;
-
+ 
     @FXML private Button btnRegistrar;
     @FXML private Button btnRegresar;
     @FXML private Label lblMensaje;
-    
     private UsuarioDAO usuarioDAO;
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         usuarioDAO = new UsuarioDAO();
         lblMensaje.setText("");
     }
-
+ 
     //eventoRegistrar
     @FXML
     public void eventoRegistrar(ActionEvent evento){
@@ -49,19 +46,16 @@ public class RegistrarUsuarioController implements Initializable {
                     txtConfirmarPassword.getText(), "Las contraseñas no coinciden");
             ValidacionException.validarLongitudMinima(txtPassword.getText(), 6, 
                     "La contraseña debe tener al menos 6 caracteres");
-            
             String usuario = txtUsusario.getText().trim();
             String password = txtPassword.getText();
             String passwordHass = SecurityUtil.hashSHA256(password);
             boolean registrado = usuarioDAO.registrarUsuario(usuario, passwordHass);
-            
             if (registrado) {
                 mostrarAlerta(Alert.AlertType.INFORMATION, "Usuario registrado con exito");
-                Main.cambiarEscena("/org/ac/view/InicioSesionView.fxml");                
+                Main.cambiarEscena("/org/ar/view/InisioSesionView.fxml");                
             }else{
                 mostrarAlerta(Alert.AlertType.ERROR, "Error al Registrar. El usuario podría ya existir.");
             }
-            
         } catch (ValidacionException e) {
             mostrarAlerta(Alert.AlertType.WARNING, e.getMessage());
             lblMensaje.setText(e.getMessage());
@@ -73,17 +67,15 @@ public class RegistrarUsuarioController implements Initializable {
     @FXML
     public void eventoRegresar(ActionEvent evento){
          try {
-            Main.cambiarEscena("/org/ar/view/InicioSesionView.fxml");
+            Main.cambiarEscena("/org/ar/view/InisioSesionView.fxml");
         } catch (IOException e) {
             System.err.println("Error al carger registro:  " +  e.getMessage());
             lblMensaje.setText("Error interno");
         }
     }
-    
     //mostrarAlerta
     private void mostrarAlerta(Alert.AlertType tipo, String mensaje){
         Alert alerta = new Alert(tipo, mensaje, ButtonType.OK);
         alerta.show(); 
     }
-    
 }
