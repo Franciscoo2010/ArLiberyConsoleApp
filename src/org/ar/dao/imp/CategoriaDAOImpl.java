@@ -15,7 +15,21 @@ public class CategoriaDAOImpl implements CategoriDAO {
 
     @Override
     public boolean insertar(Categoria categoria) {
-        
+
+        String consulta = "{call sp_insertarcategoria(?)}";
+
+        try (
+                Connection conexion = Conexion.getInstancia().conectar(); CallableStatement consultaCall = conexion.prepareCall(consulta)) {
+
+            consultaCall.setString(1, categoria.getNombre());
+            consultaCall.execute();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Error al insertar categoria: " + e.getMessage());
+        }
+
         return false;
     }
 
@@ -77,11 +91,42 @@ public class CategoriaDAOImpl implements CategoriDAO {
 
     @Override
     public boolean actualizar(Categoria categoria) {
+
+        String consulta = "{call sp_actualizarcategoria(?, ?)}";
+
+        try (
+                Connection conexion = Conexion.getInstancia().conectar(); CallableStatement consultaCall = conexion.prepareCall(consulta)) {
+
+            consultaCall.setInt(1, categoria.getId());
+            consultaCall.setString(2, categoria.getNombre());
+            consultaCall.execute();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar categoria: " + e.getMessage());
+        }
+
         return false;
     }
 
     @Override
     public boolean eliminar(int id) {
+
+        String consulta = "{call sp_eliminarcategoria(?)}";
+
+        try (
+                Connection conexion = Conexion.getInstancia().conectar(); CallableStatement consultaCall = conexion.prepareCall(consulta)) {
+
+            consultaCall.setInt(1, id);
+            consultaCall.execute();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar categoria: " + e.getMessage());
+        }
+
         return false;
     }
 
