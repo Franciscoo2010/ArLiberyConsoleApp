@@ -1,16 +1,16 @@
 package org.ar.system;
-
+ 
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+ 
 public class Main extends Application {
-
+ 
     private static Stage escenarioPrincipal;
-
+ 
     public static void cambiarEscena(String rutaFXML) throws IOException {
         //Parent raiz = FXMLLoader.load(getClass().getResource(rutaFXML));
         Parent raiz = FXMLLoader.load(Main.class.getResource(rutaFXML));                
@@ -20,14 +20,14 @@ public class Main extends Application {
         escenarioPrincipal.centerOnScreen();
         escenarioPrincipal.show();        
     }
-
+ 
     @Override
     public void start(Stage escenarioPrincipal) throws Exception {
         //convertir .fxml en nodo raiz
         Main.escenarioPrincipal = escenarioPrincipal;     
-        cambiarEscena("/org/ac/view/InisioSesionView.fxml");
+        cambiarEscena("/org/ar/view/InisioSesionView.fxml");
     }
-
+ 
     public static void main(String[] args) {
         launch(args);
     }
