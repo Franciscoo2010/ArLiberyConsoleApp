@@ -50,7 +50,12 @@ public class CategoriaViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        lblMensaje.setText("");
+
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+
+        cargarTabla();
     }
 
     @FXML
