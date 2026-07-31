@@ -2,6 +2,7 @@ package org.ar.view;
  
 import java.util.Scanner;
 import org.ar.controller.CategoriaController;
+import org.ar.system.CategoriaFXLauncher;
 import org.ar.view.CategoriaConseleView;
  
 public class MenuPrincipal {
@@ -30,10 +31,8 @@ public class MenuPrincipal {
         //swich / case
             switch (opcion) {
                 case 1:
-                    //instanciar la vista CATEGORIAS
-                    CategoriaConseleView vista = new CategoriaConseleView();
-                    CategoriaController control = new CategoriaController(vista);
-                    control.iniciar();
+                    //instanciar el panel JavaFX "Key Librería" para Categorias
+                    CategoriaFXLauncher.mostrar();
                     break;
                 case 2:
                     //instanciar la vista EDITORIALES
@@ -61,7 +60,7 @@ public class MenuPrincipal {
                     break;
                 case 8:
                     //instanciar la vista LIBROS
-                    System.out.println("\n Hasta luego sixseveniano...");
+                    System.out.println("\n Hasta pronto boy...");
                     break;
                 default:
                     System.out.println("no existe esta opción");
