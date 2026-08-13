@@ -1,4 +1,4 @@
-package org.ar.view;
+ package org.ar.view;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +12,7 @@ public class EditorialConsoleView {
     public int mostrarMenu() {
         int opcion;
 
+         
         System.out.println("------- GESTION DE EDITORIALES -------");
         System.out.println("1. CREAR NUEVA EDITORIAL");
         System.out.println("2. LISTAR EDITORIALES");

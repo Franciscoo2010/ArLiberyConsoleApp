@@ -41,30 +41,19 @@ public class EditorialViewController implements Initializable {
     @FXML
     private Label lblMensaje;
 
-    @FXML
-    private TableView<editorial> tablaEditoriales;
-    @FXML
-    private TableColumn<editorial, String> colNit;
-    @FXML
-    private TableColumn<editorial, String> colNombre;
-    @FXML
-    private TableColumn<editorial, String> colTelefono;
-    @FXML
-    private TableColumn<editorial, String> colDireccion;
+    @FXML TableView tablaEditoriales;
+    @FXML TableColumn colNit;
+    @FXML TableColumn colNombre;
+    @FXML TableColumn colTelefono;
+    @FXML TableColumn colDireccion;
 
-    private editorialDAO dao;
+    private editorialDAO dao = new editorialDAOImpl();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        dao = new editorialDAOImpl();
-        lblMensaje.setText("");
-
-        colNit.setCellValueFactory(new PropertyValueFactory<>("nit"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre_editorial"));
-        colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono_editorial"));
-        colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion_editoria"));
-
+        configurarTabla();
         cargarTabla();
+        seleccionarFila();
     }
 
     @FXML
@@ -100,6 +89,8 @@ public class EditorialViewController implements Initializable {
         txtTelefono.clear();
         txtDireccion.clear();
         lblMensaje.setText("");
+        tablaEditoriales.getSelectionModel().clearSelection();
+        txtNit.setEditable(true);
     }
 
     @FXML
@@ -116,4 +107,25 @@ public class EditorialViewController implements Initializable {
         Alert alerta = new Alert(tipo, mensaje, ButtonType.OK);
         alerta.show();
     }
+
+    private void configurarTabla() {
+        colNit.setCellValueFactory(new PropertyValueFactory<editorial, String>("nit"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<editorial, String>("nombre_editorial"));
+        colTelefono.setCellValueFactory(new PropertyValueFactory<editorial, String>("telefono_editorial"));
+        colDireccion.setCellValueFactory(new PropertyValueFactory<editorial, String>("direccion_editoria"));
+    }
+
+    private void seleccionarFila() {
+        tablaEditoriales.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                editorial item = (editorial) newValue;
+                txtNit.setText(item.getNit());
+                txtNombre.setText(item.getNombre_editorial());
+                txtTelefono.setText(item.getTelefono_editorial());
+                txtDireccion.setText(item.getDireccion_editoria());
+                txtNit.setEditable(false);
+            }
+        });
+    }
+
 }
