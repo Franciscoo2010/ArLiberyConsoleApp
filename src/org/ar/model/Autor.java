@@ -46,6 +46,19 @@ public class Autor {
         return nombreAutor;
     }
 
+
+    public int getIdAutor() {
+        return idAutor;
+    }
+
+    public void setIdAutor(int idAutor) {
+        this.idAutor = idAutor;
+    }
+
+    public String getNombreAutor() {
+        return nombreAutor;
+    }
+
     public void setNombreAutor(String nombreAutor) {
         this.nombreAutor = nombreAutor;
     }

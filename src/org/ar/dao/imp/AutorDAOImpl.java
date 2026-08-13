@@ -72,6 +72,29 @@ public class AutorDAOImpl implements AutorDAO {
         }
         return autor;
     }
+
+    @Override
+    public Autor buscarPorId(int idAutor) {
+        Autor autor = new Autor();
+        String consultaSQL = "{call sp_buscarautor(?)}";
+        try (Connection conexion = Conexion.getInstancia().conectar(); 
+             CallableStatement consultaCall = conexion.prepareCall(consultaSQL)) {
+            consultaCall.setInt(1, idAutor);
+            ResultSet tablaResultado = consultaCall.executeQuery();
+            if (tablaResultado.next()) {
+                autor.setIdAutor(tablaResultado.getInt("id_autor"));
+                autor.setNombre(tablaResultado.getString("nombre_autor"));
+                autor.setApellido(tablaResultado.getString("apellido_autor"));
+                autor.setNacionalidad(tablaResultado.getString("nacionalidad"));
+                autor.setBiografia(tablaResultado.getString("biografia"));
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            System.err.print("Error al buscar Autor: " + e.getMessage());
+        }
+        return autor;
+    }
 //metodos para la tabla autor
     @Override
     public boolean actualizar(Autor autor) {

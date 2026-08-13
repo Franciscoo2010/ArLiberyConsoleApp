@@ -50,17 +50,6 @@ public class AutorFXController implements Initializable {
         seleccionarFila();
     }
 
-    private void configurarTabla() {
-        //CallValueFactory, propertValueFactory
-        //Valor de fabrica de celdam propiedad de fabrica de celda
-        colId.setCellValueFactory(new PropertyValueFactory<Autor, Integer>("idAutor"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<Autor, String>("nombreAutor"));
-        colApellido.setCellValueFactory(new PropertyValueFactory<Autor, String>("apellidoAutor"));
-        colNacionalidad.setCellValueFactory(new PropertyValueFactory<Autor, String>("nacionalidad"));
-        colBiografia.setCellValueFactory(new PropertyValueFactory<Autor, String>("biografia"));
-
-    }
-
     private void cargarTabla() {
         listaAutores.setAll(autorDAO.listarTodos());
         tablaAutores.setItems(listaAutores);
@@ -144,4 +133,14 @@ public class AutorFXController implements Initializable {
         alert.showAndWait();
     }
 
-}
+    private void configurarTabla() {
+        //CallValueFactory, propertValueFactory
+        //Valor de fabrica de celdam propiedad de fabrica de celda
+        colId.setCellValueFactory(new PropertyValueFactory<Autor, Integer>("idAutor"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<Autor, String>("nombreAutor"));
+        colApellido.setCellValueFactory(new PropertyValueFactory<Autor, String>("apellidoAutor"));
+        colNacionalidad.setCellValueFactory(new PropertyValueFactory<Autor, String>("nacionalidad"));
+        colBiografia.setCellValueFactory(new PropertyValueFactory<Autor, String>("biografia"));
+
+    }
+
