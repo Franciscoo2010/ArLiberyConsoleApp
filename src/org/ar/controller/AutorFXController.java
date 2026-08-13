@@ -143,4 +143,5 @@ public class AutorFXController implements Initializable {
         colBiografia.setCellValueFactory(new PropertyValueFactory<Autor, String>("biografia"));
 
     }
+}
 
