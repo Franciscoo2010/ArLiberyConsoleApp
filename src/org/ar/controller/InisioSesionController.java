@@ -85,7 +85,7 @@ public class InisioSesionController implements Initializable {
                 rutaFXML = "/org/ar/view/CategoriaView.fxml";
                 break;
             case "cajero":
-                rutaFXML = "/org/ar/view/CajeroDashboardView.fxml";
+                rutaFXML = "/org/ar/view/AutoresView.fxml";
                 break;
             case "empleado":
                 rutaFXML = "/org/ar/view/EditorialView.fxml";
