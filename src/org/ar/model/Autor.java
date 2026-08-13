@@ -1,64 +1,101 @@
-    package org.ar.model;
+package org.ar.model;
 
-    public class Autor {
+public class Autor {
 
-        private int id_autor;
-        private String nombre_autor;
-        private String apellido_autor;
-        private String nacionalidad;
-        private String biografia;
+    private int idAutor;
+    private String nombreAutor;
+    private String apellidoAutor;
+    private String nacionalidad;
+    private String biografia;
 
-        public Autor() {
-        }
-
-        public Autor(int id_autor, String nombre_autor,
-                     String apellido_autor,
-                     String nacionalidad,
-                     String biografia) {    
-            this.id_autor = id_autor;
-            this.nombre_autor = nombre_autor;
-            this.apellido_autor = apellido_autor;
-            this.nacionalidad = nacionalidad;
-            this.biografia = biografia;
-        }
-
-        public int getId_autor() {
-            return id_autor;
-        }
-
-    public void setId_autor(int id_autor) {
-        this.id_autor = id_autor;
+    public Autor() {
     }
 
-        public String getNombre_autor() {
-            return nombre_autor;
-        }
-
-    public void setNombre_autor(String nombre_autor) {
-        this.nombre_autor = nombre_autor;
+    public Autor(int idAutor, String nombreAutor, String apellidoAutor,
+                   String nacionalidad, String biografia) {
+        this.idAutor = idAutor;
+        this.nombreAutor = nombreAutor;
+        this.apellidoAutor = apellidoAutor;
+        this.nacionalidad = nacionalidad;
+        this.biografia = biografia;
     }
 
-        public String getApellido_autor() {
-            return apellido_autor;
-        }
-
-    public void setApellido_autor(String apellido_autor) {
-        this.apellido_autor = apellido_autor;
+    public Autor(int idAutor, String nombreAutor, String apellidoAutor) {
+        this.idAutor = idAutor;
+        this.nombreAutor = nombreAutor;
+        this.apellidoAutor = apellidoAutor;
     }
 
-        public String getNacionalidad() {
-            return nacionalidad;
-        }
+    public Autor(int idAutor, String nombreAutor, String apellidoAutor, String nacionalidad) {
+        this.idAutor = idAutor;
+        this.nombreAutor = nombreAutor;
+        this.apellidoAutor = apellidoAutor;
+        this.nacionalidad = nacionalidad;
+        this.biografia = biografia;
+    }
 
-        public void setNacionalidad(String nacionalidad) {
-            this.nacionalidad = nacionalidad;
-        }
+    public int getIdAutor() {
+        return idAutor;
+    }
 
-        public String getBiografia() {
-            return biografia;
-        }
+    public void setIdAutor(int idAutor) {
+        this.idAutor = idAutor;
+    }
 
-        public void setBiografia(String biografia) {
-            this.biografia = biografia;
-        }
-    }   
+    public String getNombreAutor() {
+        return nombreAutor;
+    }
+
+    public void setNombreAutor(String nombreAutor) {
+        this.nombreAutor = nombreAutor;
+    }
+
+    public String getApellidoAutor() {
+        return apellidoAutor;
+    }
+
+    public void setApellidoAutor(String apellidoAutor) {
+        this.apellidoAutor = apellidoAutor;
+    }
+
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    public String getBiografia() {
+        return biografia;
+    }
+
+    public void setBiografia(String biografia) {
+        this.biografia = biografia;
+    }
+
+    // Métodos para compatibilidad con el controlador
+    public String getNombre() {
+        return nombreAutor;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombreAutor = nombre;
+    }
+
+    public String getApellido() {
+        return apellidoAutor;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellidoAutor = apellido;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + idAutor +
+               " | Nombre: " + nombreAutor + " " + apellidoAutor +
+               " | Nacionalidad: " + nacionalidad;
+    }
+
+}
