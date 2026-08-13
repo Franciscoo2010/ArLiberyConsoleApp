@@ -15,7 +15,7 @@ public class ClienteConsoleView {
         System.out.println("-------Gestion de Clientes---------");
         System.out.println("-1 CREAR NUEVO CLIENTE-");
         System.out.println("-2 LISTAR CLIENTES-");
-        System.out.println("-3 BUSCAR CLIENTE POR ID-");
+        System.out.println("-3 BUSCAR CLIENTE POR CUI-");
         System.out.println("-4 MODIFICAR CLIENTE-");
         System.out.println("-5 ELIMINAR CLIENTE-");
         System.out.println("-6 REGRESAR MENU PRINCIPAL-");
