@@ -1,44 +1,35 @@
 package org.ar.system;
 
-import java.io.IOException;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- * @author Alvaro Calderon
- */
 public class Main extends Application {
-
+//Escenario principal
     private static Stage escenarioPrincipal;
-
-    /**
-     * Permite cambiar la escena activa en el escenario principal del sistema JavaFX.
-     * @param rutaFXML Ruta relativa al archivo .fxml dentro de la estructura del proyecto.
-     */
-    public static void cambiarEscena(String rutaFXML) throws IOException {
-        Parent raiz = FXMLLoader.load(Main.class.getResource(rutaFXML));
-        Scene escena = new Scene(raiz);
-        escenarioPrincipal.setScene(escena);
-        escenarioPrincipal.sizeToScene();
-        escenarioPrincipal.centerOnScreen();
-        escenarioPrincipal.show();
-    }
 
     @Override
     public void start(Stage escenarioPrincipal) throws Exception {
-        Main.escenarioPrincipal = escenarioPrincipal;
-        escenarioPrincipal.setTitle("Key Librería");
+        this.escenarioPrincipal = escenarioPrincipal;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/ar/view/AutorView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        escenarioPrincipal.setTitle("AR Libery");
+        escenarioPrincipal.setScene(scene);
+        escenarioPrincipal.show();
+    }
 
-        // Punto de entrada de la aplicación JavaFX
-        // Si necesitas ir directo a EditorialView sin pasar por Login, 
-        // cambia la ruta a: "/org/ar/view/EditorialView.fxml"
-        cambiarEscena("/org/ar/view/InisioSesionView.fxml");
+    public static void cambiarVista(String fxmlPath) throws Exception {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlPath));
+        Parent root = loader.load();
+        escenarioPrincipal.setScene(new Scene(root));
     }
 
     public static void main(String[] args) {
         launch(args);
     }
+
 }
