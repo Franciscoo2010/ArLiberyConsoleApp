@@ -1,15 +1,35 @@
 package org.ar.system;
 
-import org.ar.view.MenuPrincipal;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application {
+
+    private static Stage escenarioPrincipal;
+
+    @Override
+    public void start(Stage escenarioPrincipal) throws Exception {
+        this.escenarioPrincipal = escenarioPrincipal;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/ar/view/AutorView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        escenarioPrincipal.setTitle("AR Libery");
+        escenarioPrincipal.setScene(scene);
+        escenarioPrincipal.show();
+    }
+
+    public static void cambiarVista(String fxmlPath) throws Exception {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlPath));
+        Parent root = loader.load();
+        escenarioPrincipal.setScene(new Scene(root));
+    }
 
     public static void main(String[] args) {
-        
-        // Patrón de Diseño: MVC (Modelo, Vista, Controlador) y DAO (Objeto de Acceso a Datos).
-        // Aplicado correctamente para la gestión de Autores.
-        
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.iniciarSistema();
+        launch(args);
     }
+
 }
