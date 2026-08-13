@@ -4,14 +4,15 @@ import java.util.List;
 import org.ar.model.Autor;
 
 public interface AutorDAO {
-
+    
     boolean insertar(Autor autor);
-
     List<Autor> listarTodos();
-
-    Autor buscar(int idAutor);
-
+    Autor buscar (int id_autor);
     boolean actualizar(Autor autor);
+    boolean eliminar (int id_autor);
 
-    boolean eliminar(int idAutor);
+    public Autor buscarPorId(int id);
+
+    public boolean crear(Autor cliente);
+    
 }
