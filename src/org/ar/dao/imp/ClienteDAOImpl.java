@@ -3,33 +3,30 @@ package org.ar.dao.imp;
 import java.util.ArrayList;
 import org.ar.model.Clientes;
 import otg.ar.dao.ClienteDAO;
-import org.ar.util.Conexion;
-import java.sql.CallableStatement;
-import java.sql.ResultSet;
 
+import org.ar.util.Conexion;
 import java.util.List;
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
-    public boolean insertar(Clientes cliente) {
-        return false;
-    }
-
-    @Override
     public List<Clientes> listarTodos() {
-
-        List<Clientes> clientes = new ArrayList<>();
-
-        String consulta = "{call sp_listarClientes()}";
-
-        try (
-                Connection conexion = Conexion.getInstancia().conectar(); CallableStatement consultaCall = conexion.prepareCall(consulta); ResultSet tablaResultado = consultaCall.executeQuery()) {
-
+        //crear lista
+        List<Clientes> clientes = new ArrayList<>();//null
+        //crear nustras consulta
+        String consulta = "{call sp_listarclientes()}";
+        //maperar el resultado de la consulta a objeto y lo agregamos a la lista
+        //try with resources / intentar con recursos --> cierra el recurso al completar el intento
+        //recurso: Conexion, al final se cierra
+        try (Connection conexion = Conexion.getInstancia().conectar(); CallableStatement consultaCall = conexion.prepareCall(consulta); ResultSet tablaResultado = consultaCall.executeQuery();) {
+            //ciclo para rellenar mi lista
+            //verificar cada filta del result set
+            //va a guarda cada celda dentro de cada atributo de mi objeto
             while (tablaResultado.next()) {
-
                 clientes.add(new Clientes(
                         tablaResultado.getLong("cui"),
                         tablaResultado.getString("nombre_cliente"),
@@ -37,40 +34,53 @@ public class ClienteDAOImpl implements ClienteDAO {
                         tablaResultado.getString("correo_electronico")
                 ));
             }
-
-        } catch (Exception e) {
-            System.out.println("Error al listar clientes: " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.print("Error al listar Clientes: " + e.getMessage());
         }
 
-        return clientes;   // <-- aquí está la corrección
+        //retornamos un alista
+        return clientes;
+    }
+
+    @Override
+    public boolean crear(Clientes cliente) {
+        String consulta = "{call sp_insertarcliente(?, ?, ?, ?)}";
+        try (Connection conexion = Conexion.getInstancia().conectar();
+             CallableStatement consultaCall = conexion.prepareCall(consulta)) {
+            consultaCall.setLong(1, cliente.getCui());
+            consultaCall.setString(2, cliente.getNombre());
+            consultaCall.setString(3, cliente.getApellido());
+            consultaCall.setString(4, cliente.getCorreoElectronico());
+            return consultaCall.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.print("Error al crear Cliente: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
     public Clientes buscarPorId(long cui) {
+        //objeto
         Clientes cliente = new Clientes();
 
+        //consulta
         String consultaSQL = "{call sp_buscarcliente(?)}";
-
-        try (
-            Connection conexion = Conexion.getInstancia().conectar();
-            CallableStatement consultaCall = conexion.prepareCall(consultaSQL);){
-                consultaCall.setLong(1, cui);
-                ResultSet tablaResultado = consultaCall.executeQuery();
-                if (tablaResultado.next()) {
-                    cliente.setCui(tablaResultado.getLong("cui"));
-                    cliente.setNombre(tablaResultado.getString("nombre_cliente"));
-                    cliente.setApellido(tablaResultado.getString("apellido_cliente"));
-                    cliente.setCorreoElectronico(tablaResultado.getString("correo_electronico"));
-                } else {
-                    //System.out.println("No existe el cliente con el ID indicado");
-                    return null;
-
-                }
-            
-
+        //mapeamos el ResultSet al Objeto(Cliente) segun sus atributos y la fila devulta
+        try (Connection conexion = Conexion.getInstancia().conectar(); CallableStatement consultaCall = conexion.prepareCall(consultaSQL);) {
+            consultaCall.setLong(1, cui);
+            ResultSet tablaResultado = consultaCall.executeQuery();
+            if (tablaResultado.next()) {
+                cliente.setCui(tablaResultado.getInt("cui"));
+                cliente.setNombre(tablaResultado.getString("nombre_cliente"));
+                cliente.setApellido(tablaResultado.getString("apellido_cliente"));
+                cliente.setCorreoElectronico(tablaResultado.getString("correo_electronico"));
+            } else {
+                return null;
+            }
         } catch (SQLException e) {
-            System.err.println("Error al buscar cliente: " + e.getMessage());
+            System.err.print("Error al buscar Cliente: " + e.getMessage());
         }
+        //retornamos el objeto
         return cliente;
     }
 
