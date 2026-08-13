@@ -2,6 +2,7 @@ package org.ar.controller;
 
 import otg.ar.dao.AutorDAO;
 import org.ar.dao.imp.AutorDAOImpl;
+import org.ar.model.Autor;
 import org.ar.view.AutorConsoleView;
 
 public class AutorController {
@@ -15,21 +16,43 @@ public class AutorController {
     }
 
     public void iniciar() {
-
         int opcion;
 
         do {
-
             opcion = vista.mostrarMenu();
 
-            if (opcion == 2) {
-                listar();
+            switch (opcion) {
+                case 1:
+                    break;
+
+                case 2:
+                    listar();
+                    break;
+
+                case 3:
+                    buscar();
+                    break;
+
+                case 4:
+                    break;
             }
 
-        } while (opcion != 6);
+        } while (opcion != 0);
     }
 
     private void listar() {
-        vista.mostrarListaAutores(dao.listarTodos());
+        vista.mostrarListaAutor(dao.listarTodos());
+    }
+
+    private void buscar() {
+        int id = vista.solicitarIdAutor();
+
+        Autor autor = dao.buscar(id);
+
+        if (autor != null) {
+            vista.mostrarAutor(autor);
+        } else {
+            vista.mostrarMensaje("Autor no encontrado con el ID: " + id);
+        }
     }
 }
