@@ -1,15 +1,36 @@
 package org.ar.system;
- 
-import org.ar.view.MenuPrincipal;
- 
-public class Main {
- 
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    private static Stage escenarioPrincipal;
+
+    public static void cambiarEscena(String rutaFXML) throws Exception {
+        Parent raiz = FXMLLoader.load(Main.class.getResource(rutaFXML));
+        Scene escena = new Scene(raiz);
+
+        escenarioPrincipal.setScene(escena);
+        escenarioPrincipal.sizeToScene();
+        escenarioPrincipal.centerOnScreen();
+        escenarioPrincipal.show();
+    }
+
+    @Override
+    public void start(Stage escenarioPrincipal) throws Exception {
+
+        Main.escenarioPrincipal = escenarioPrincipal;
+        escenarioPrincipal.setTitle("Key Librería");
+
+        // Abre directamente Categorías
+        cambiarEscena("/org/ar/view/CategoriaView.fxml");
+    }
+
     public static void main(String[] args) {
- 
-        // MVC Modelo, Vista, Controlador
-        // DAO (Objeto de Acceso a Datos)
- 
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.iniciarSistema();
+        launch(args);
     }
 }
