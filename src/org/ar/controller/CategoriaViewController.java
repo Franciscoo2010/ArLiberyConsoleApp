@@ -36,11 +36,11 @@ public class CategoriaViewController implements Initializable {
     private Label lblMensaje;
 
     @FXML
-    private TableView<Categoria> tblCategorias;
+    TableView tblCategorias;
     @FXML
-    private TableColumn<Categoria, Integer> colId;
+    TableColumn colId;
     @FXML
-    private TableColumn<Categoria, String> colNombre;
+    TableColumn colNombre;
 
     private final CategoriDAO dao;
 
@@ -50,11 +50,7 @@ public class CategoriaViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lblMensaje.setText("");
-
-        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-
+        configurarTabla();
         cargarTabla();
     }
 
@@ -107,6 +103,12 @@ public class CategoriaViewController implements Initializable {
     private void mostrarAlerta(Alert.AlertType tipo, String mensaje) {
         Alert alerta = new Alert(tipo, mensaje, ButtonType.OK);
         alerta.show();
+    }
+
+    private void configurarTabla() {
+        colId.setCellValueFactory(new PropertyValueFactory<Categoria, String >("Id"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<Categoria, String >("nombre"));
+        
     }
 
 }
