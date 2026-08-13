@@ -28,7 +28,6 @@ public class Conexion {
         return instancia;
     }
  
-    //Método para entregar una conexión fresca cada vez que se pida
     public Connection conectar() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }

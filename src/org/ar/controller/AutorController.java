@@ -52,6 +52,7 @@ public class AutorController {
         if (autor != null) {
             vista.mostrarAutor(autor);
         } else {
+            //mensaje por si no se encuentra el ID
             vista.mostrarMensaje("Autor no encontrado con el ID: " + id);
         }
     }

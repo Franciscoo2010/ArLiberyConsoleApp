@@ -72,7 +72,7 @@ public class AutorDAOImpl implements AutorDAO {
         }
         return autor;
     }
-
+//metodos para la tabla autor
     @Override
     public boolean actualizar(Autor autor) {
         return false;

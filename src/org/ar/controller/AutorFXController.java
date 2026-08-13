@@ -8,8 +8,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import otg.ar.dao.AutorDAO;
 import org.ar.dao.imp.AutorDAOImpl;
 import org.ar.model.Autor;
@@ -31,14 +33,32 @@ public class AutorFXController implements Initializable {
     private Label lblMensaje;
     @FXML
     private TableView<Autor> tablaAutores; // Tabla de entidad: autor
+    //colID, colNombre, colApellido, colNacionalidad, colBiografia
+    @FXML    TableColumn colId;
+    @FXML    TableColumn colNombre;
+    @FXML    TableColumn colApellido;
+    @FXML    TableColumn colNacionalidad;
+    @FXML    TableColumn colBiografia;
 
     private final AutorDAO autorDAO = new AutorDAOImpl();
-    private final ObservableList<Autor> listaAutores = FXCollections.observableArrayList(); // Entidad: Autor
+    private final ObservableList<Autor> listaAutores = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        configurarTabla();
         cargarTabla();
         seleccionarFila();
+    }
+
+    private void configurarTabla() {
+        //CallValueFactory, propertValueFactory
+        //Valor de fabrica de celdam propiedad de fabrica de celda
+        colId.setCellValueFactory(new PropertyValueFactory<Autor, Integer>("idAutor"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<Autor, String>("nombreAutor"));
+        colApellido.setCellValueFactory(new PropertyValueFactory<Autor, String>("apellidoAutor"));
+        colNacionalidad.setCellValueFactory(new PropertyValueFactory<Autor, String>("nacionalidad"));
+        colBiografia.setCellValueFactory(new PropertyValueFactory<Autor, String>("biografia"));
+
     }
 
     private void cargarTabla() {

@@ -2,7 +2,7 @@ package otg.ar.dao;
 
 import java.util.List;
 import org.ar.model.Autor;
-
+//metodo DAO completo
 public interface AutorDAO {
     
     boolean insertar(Autor autor);

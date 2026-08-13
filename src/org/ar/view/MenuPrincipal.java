@@ -2,7 +2,7 @@ package org.ar.view;
 
 import java.util.Scanner; 
 import org.ar.controller.AutorController;
-
+//menú principal de principio
 public class MenuPrincipal {
 Scanner leer = new Scanner(System.in);
     public void iniciar(){

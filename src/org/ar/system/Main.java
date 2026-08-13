@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
+//Escenario principal
     private static Stage escenarioPrincipal;
 
     @Override

@@ -3,7 +3,7 @@ package org.ar.view;
 import java.util.List;
 import java.util.Scanner;
 import org.ar.model.Autor;
-
+//menú de configuración para autores
 public class AutorConsoleView {
 
     private final Scanner leer = new Scanner(System.in);

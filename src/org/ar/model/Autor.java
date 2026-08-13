@@ -2,7 +2,7 @@ package org.ar.model;
 
 public class Autor {
 
-    private int idAutor;
+    public int idAutor;
     private String nombreAutor;
     private String apellidoAutor;
     private String nacionalidad;
@@ -33,7 +33,7 @@ public class Autor {
         this.nacionalidad = nacionalidad;
         this.biografia = biografia;
     }
-
+//Getters y Setters
     public int getIdAutor() {
         return idAutor;
     }
