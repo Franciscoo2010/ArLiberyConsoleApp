@@ -1,24 +1,38 @@
 package org.ar.model;
 
+//POJO: Nombre, atributos, constructores, getters y setters
 public class Clientes {
 
+    /*
+    create table clientes(
+        cui bigint primary key,
+        nombre_cliente varchar(100),
+        apellido_cliente varchar(100),
+        correo_electronico varchar(100)
+    );
+     */
 
-    // atributos dde clase
-    long cui;
+    //atributos de clase
+    Long cui;
     String nombre;
     String apellido;
     String correoElectronico;
 
-    //constructores
-public Clientes(long cui, String nombre, String apellido, String correoElectronico) {
+    //constructores: asignación de datos, instanciar objetos
+    //vacio
+    public Clientes() {
+    }
+    //lleno o con parametros
+    public Clientes(long cui, String nombre, String apellido, String correoElectronico) {
         this.cui = cui;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correoElectronico = correoElectronico;
-}
+    }
+    //personalizador
+    
+    
     //getter and setters
-
-   
 
     public long getCui() {
         return cui;
@@ -28,15 +42,15 @@ public Clientes(long cui, String nombre, String apellido, String correoElectroni
         this.cui = cui;
     }
 
-    public String getNombre() {
+    public String getNombre() {        
         return nombre;
     }
 
     public void setNombre(String nombre) {
-        //formatear matuscula
-        String nombreMayuscula = nombre.toUpperCase();
-        //formatear a Iniciar con Mayúscila
-        this.nombre = nombreMayuscula;
+        //formatear a Mayusucual
+        String nombreMayusculas = nombre.toUpperCase();
+        //formatear a Inicia con Mayusuculas
+        this.nombre = nombreMayusculas;
     }
 
     public String getApellido() {
@@ -54,10 +68,6 @@ public Clientes(long cui, String nombre, String apellido, String correoElectroni
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
-
-// Constructor vacío requerido para poder instanciar un cliente vacío y luego llenarlo con setters
-public Clientes() {
+    
+    
 }
-
-    }
-
