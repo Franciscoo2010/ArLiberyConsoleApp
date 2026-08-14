@@ -1,18 +1,19 @@
 package org.ar.view;
 
 import java.util.Scanner;
+import org.ar.controller.AutorController;
 import org.ar.controller.ClienteController;
-import org.ar.view.ClienteConsoleView;
+import org.ar.controller.EditorialController;
+import org.ar.system.CategoriaFXLauncher;
 
 public class MenuPrincipal {
+
     private final Scanner leer = new Scanner(System.in);
-    
-    //heramienta scanner: lee datos del usuario
-    
-    public void iniciarSistema(){
-        int opcion;
-        //ciclo para el menu: do while
-        do {            
+
+    public void iniciarSistema() {
+        int opcion = 0;
+
+        do {
             System.out.println("--------------------------------------");
             System.out.println("    SISTEMA CENTRAL LIBRERIA - IN4CM");
             System.out.println("--------------------------------------");
@@ -24,49 +25,65 @@ public class MenuPrincipal {
             System.out.println("6. Entrada a AUTORES");
             System.out.println("7. Entrada a DETALLE AUTORES");
             System.out.println("8. SALIR DEL SISTEMA");
-            System.out.println("Selecciones una opción: ");
-            
-            opcion = Integer.parseInt(leer.nextLine());
-        //swich / case
+            System.out.print("Seleccione una opción: ");
+
+            try {
+                opcion = Integer.parseInt(leer.nextLine());
+            } catch (NumberFormatException e) {
+                opcion = -1; // Fuerza la ejecución del bloque 'default' si ingresan texto
+            }
+
             switch (opcion) {
                 case 1:
-                    //instanciar la vista CLIENTES
-                    ClienteConsoleView vista = new ClienteConsoleView();
-                    ClienteController control = new ClienteController(vista);
-                    control.iniciar();
+                    System.out.println("\n--- CLIENTES ---");
+                    ClienteConsoleView vistaCliente = new ClienteConsoleView();
+                        ClienteController controladorCliente = new ClienteController(vistaCliente);
+                        controladorCliente.iniciar();
                     break;
+
                 case 2:
-                    //instanciar la vista EDITORIALES
-                    System.out.println("CATEGORIAS");
+                    System.out.println("\n--- CATEGORIAS ---");
+                    CategoriaFXLauncher.mostrar();
                     break;
+
                 case 3:
-                    //instanciar la vista LIBROS
-                    System.out.println("LIBROS");
+                    System.out.println("\n--- LIBROS ---");
                     break;
+
                 case 4:
-                    //instanciar la vista LIBROS
-                    System.out.println("EDITORIALES");
+                    System.out.println("\n--- EDITORIALES ---");
+                    EditorialConsoleView vistaEditorial = new EditorialConsoleView();
+                    EditorialController controlEditorial = new EditorialController(vistaEditorial);
+                    controlEditorial.iniciar();
                     break;
+
                 case 5:
-                    //instanciar la vista LIBROS
-                    System.out.println("COMPRAS");
+                    System.out.println("\n--- COMPRAS ---");
                     break;
-                 case 6:
-                    //instanciar la vista LIBROS
-                    System.out.println("AUTORES");
+
+                case 6:
+                    System.out.println("\n--- AUTORES ---");
+                    AutorConsoleView vistaAutor = new AutorConsoleView();
+                    AutorController controladorAutor= new AutorController (vistaAutor);
+                    controladorAutor.iniciar();
                     break;
+
                 case 7:
-                    //instanciar la vista LIBROS
-                    System.out.println("DETALLE AUTORES");
+                    System.out.println("\n--- DETALLE AUTORES ---");
                     break;
+
                 case 8:
-                    //instanciar la vista LIBROS
-                    System.out.println("\n Hasta luego sixseveniano...");
+                    System.out.println("\nHasta pronto boy...");
+                    System.out.println("Hasta luego sixseveniano...");
                     break;
+
                 default:
-                    System.out.println("no existe esta opción");
+                    System.out.println("\nNo existe esta opción. Intente de nuevo.");
+                    break;
             }
+            
+            System.out.println(); // Salto de línea para dar espacio entre repeticiones
+
         } while (opcion != 8);
-        
     }
 }

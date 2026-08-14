@@ -82,13 +82,13 @@ public class InisioSesionController implements Initializable {
         
         switch (usuario.getRol().toLowerCase()) {
             case "admin":
-                rutaFXML = "/org/ar/view/CategoriaView.fxml";
+                rutaFXML = "/org/ar/view/MenuPrincipal.fxml";
                 break;
             case "cajero":
-                rutaFXML = "/org/ar/view/AutoresView.fxml";
+                rutaFXML = "/org/ar/view/MenuPrincipal.fxml";
                 break;
             case "empleado":
-                rutaFXML = "/org/ar/view/EditorialView.fxml";
+                rutaFXML = "/org/ar/view/MenuPrincipal.fxml";
                 break;
             default:
                 System.err.println("Rol no reconocido: " + usuario.getRol());

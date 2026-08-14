@@ -63,6 +63,8 @@
                 <HBox spacing="10.0">
                     <children>
                         <Button fx:id="btnActualizarTabla" mnemonicParsing="false" onAction="#eventoActualizarTabla" text="Actualizar Tabla" />
+                        <!-- BOTÓN AGREGADO AQUÍ -->
+                        <Button fx:id="btnVolverMenu" mnemonicParsing="false" onAction="#volverMenu" text="Volver al Menú" />
                     </children>
                 </HBox>
             </children>

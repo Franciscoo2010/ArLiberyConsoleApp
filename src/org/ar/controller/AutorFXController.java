@@ -112,7 +112,7 @@ public class AutorFXController implements Initializable {
     @FXML
     private void handleVolver() {
         try {
-            Main.cambiarEscena("/org/ar/view/InisioSesionView.fxml");
+            Main.cambiarEscena("/org/ar/view/MenuPrincipal.fxml");
         } catch (Exception e) {
             mostrarError("Error al volver al menú: " + e.getMessage());
         }

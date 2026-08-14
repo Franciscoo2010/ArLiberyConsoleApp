@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.ar.dao.imp.CategoriaDAOImpl;
 import org.ar.model.Categoria;
+import org.ar.system.Main;
 import otg.ar.dao.CategoriDAO;
 
 public class CategoriaViewController implements Initializable {
@@ -91,9 +92,20 @@ public class CategoriaViewController implements Initializable {
 
     @FXML
     public void volverMenu(ActionEvent evento) {
-        Stage escenario = (Stage) btnVolver.getScene().getWindow();
-        escenario.close();
+        try {
+            Main.cambiarEscena("/org/ar/view/MenuPrincipal.fxml");
+        } catch (Exception e) {
+            mostrarError("Error al volver al menú: " + e.getMessage());
+        }
     }
+    private void mostrarError(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
 
     private void cargarTabla() {
         ObservableList<Categoria> categorias = FXCollections.observableArrayList(dao.listarTodos());
